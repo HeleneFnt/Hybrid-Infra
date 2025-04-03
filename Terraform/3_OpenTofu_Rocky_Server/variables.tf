@@ -16,14 +16,14 @@ variable "vcpu" {
 variable "source_image" {
   description = "Source image for the domain"
   type        = string
-  default     = "/home/helene/Downloads/noble-server-cloudimg-amd64.img"
+  default     = "/home/helene/Downloads/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
   
 }
 
 variable "name" {
   description = "Name of the domain"
   type        = string
-  default     = "ubuntu-vm"
+  default     = "rocky-vm"
   
 }
 

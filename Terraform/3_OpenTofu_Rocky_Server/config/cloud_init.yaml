@@ -1,0 +1,26 @@
+#cloud-config
+hostname: ${hostname}
+ssh_authorized_keys:
+  - ${ssh_key}
+users:
+  - name: "rocky"
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    groups: users, admin
+    home: /home/rocky
+    shell: "/bin/bash"
+    ssh_authorized_keys:
+    - ${ssh_key}
+ssh_pwauth: true
+disable_root: false
+# chpasswd:
+#   list: |
+#     rocky:linux
+#   expire: False
+bootcmd:
+  - echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet edd=off"' >> /etc/default/grub
+  - grub2-mkconfig -o /boot/grub2/grub.cfg
+package_update: true
+packages:
+  - qemu-guest-agent
+runcmd:
+  - [ systemctl, enable, --now, qemu-guest-agent]

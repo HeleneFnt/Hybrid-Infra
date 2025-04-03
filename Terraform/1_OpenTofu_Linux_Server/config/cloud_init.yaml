@@ -6,6 +6,8 @@ ssh_authorized_keys:
 users:
   - name: "ubuntu"
     sudo: "ALL=(ALL) NOPASSWD:ALL"
+    groups: users, ubuntu
+    home: /home/rocky
     shell: "/bin/bash"
     ssh_authorized_keys:
 
