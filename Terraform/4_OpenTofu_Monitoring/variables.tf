@@ -23,7 +23,7 @@ variable "source_image" {
 variable "name" {
   description = "Name of the domain"
   type        = string
-  default     = "ubuntu"
+  default     = "monitor"
   
 }
 
@@ -51,46 +51,5 @@ variable "network_name" {
 variable "ssh_key" {
   description = "Path to the SSH public key"
   type        = string
-  default     = "/home/helene/.ssh/id_rsa.pub"
-}
-
-variable "alertmanager_email_password" {
-  description = "SMTP password for Alertmanager"
-  type        = string
-  sensitive   = true
-}
-
-variable "receiver_name" {
-  description = "Receiver name for Alertmanager"
-  type        = string
-}
-
-variable "email_to" {
-  description = "Destination mail for alerts"
-  type        = string
-}
-
-variable "email_from" {
-  description = "Sender's mail"
-  type        = string
-}
-
-variable "smtp_host" {
-  description = "SMTP Host (exemple: smtp.gmail.com)"
-  type        = string
-}
-
-variable "smtp_port" {
-  description = "SMTP  Port (exemple: 587)"
-  type        = string
-}
-
-variable "auth_username" {
-  description = "Username for SMTP authentication"
-  type        = string
-}
-
-variable "auth_identity" {
-  description = "Identity for SMTP authentication"
-  type        = string
+  default     = "~/.ssh/id_rsa.pub"
 }

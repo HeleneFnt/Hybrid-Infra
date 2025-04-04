@@ -1,0 +1,20 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 12h
+  receiver: "monitor-notifications"
+
+receivers:
+- name: "monitor-notifications"
+  email_configs:
+  - to: "purpleyeaah@gmail.com"
+    from: "helene.finot@le-campus-numerique.fr"
+    smarthost: "smtp.gmail.com:587"
+    auth_username: "helene.finot@le-campus-numerique.fr"
+    auth_identity: "helene.finot@le-campus-numerique.fr"
+    auth_password: "ylzh vygs nhqe ipnm"
+    send_resolved: true

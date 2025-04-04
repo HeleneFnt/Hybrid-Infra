@@ -23,7 +23,7 @@ variable "source_image" {
 variable "name" {
   description = "Name of the domain"
   type        = string
-  default     = "rocky-vm"
+  default     = "rocky"
   
 }
 
@@ -51,5 +51,5 @@ variable "network_name" {
 variable "ssh_key" {
   description = "Path to the SSH public key"
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "/home/helene/.ssh/id_rsa.pub"
 }

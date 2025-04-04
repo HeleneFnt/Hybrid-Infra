@@ -1,26 +1,29 @@
 #cloud-config
 hostname: ${hostname}
+ssh_pwauth: false
 ssh_authorized_keys:
   - ${ssh_key}
 users:
   - name: "rocky"
     sudo: "ALL=(ALL) NOPASSWD:ALL"
-    groups: users, admin
+    groups: users, sudo
     home: /home/rocky
     shell: "/bin/bash"
     ssh_authorized_keys:
-    - ${ssh_key}
-ssh_pwauth: true
-disable_root: false
-# chpasswd:
-#   list: |
-#     rocky:linux
-#   expire: False
-bootcmd:
-  - echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet edd=off"' >> /etc/default/grub
-  - grub2-mkconfig -o /boot/grub2/grub.cfg
+      - ${ssh_key}
+    lock_passwd: false
+
 package_update: true
 packages:
   - qemu-guest-agent
+
+bootcmd:
+  - echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet edd=off"' >> /etc/default/grub
+  - grub2-mkconfig -o /boot/grub2/grub.cfg
+
 runcmd:
-  - [ systemctl, enable, --now, qemu-guest-agent]
+  - [ systemctl, enable, --now, qemu-guest-agent ]
+  - [mkdir, -p, /home/rocky/.ssh]
+  - [chown, -R, rocky:rocky, /home/rocky/.ssh]
+  - [chmod, 700, /home/rocky/.ssh]
+  - [chmod, 600, /home/rocky/.ssh/authorized_keys]

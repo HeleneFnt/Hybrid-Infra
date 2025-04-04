@@ -6,13 +6,19 @@ ssh_authorized_keys:
 users:
   - name: "ubuntu"
     sudo: "ALL=(ALL) NOPASSWD:ALL"
-    groups: users, ubuntu
-    home: /home/rocky
+    groups: users, sudo
+    home: /home/ubuntu
     shell: "/bin/bash"
     ssh_authorized_keys:
+      - ${ssh_key}
+    lock_passwd: false
 
 package_update: true
 packages:
   - qemu-guest-agent
 runcmd:
   - [ systemctl, enable, --now, qemu-guest-agent ]
+  - [mkdir, -p, /home/ubuntu/.ssh]
+  - [chown, -R, ubuntu:ubuntu, /home/ubuntu/.ssh]
+  - [chmod, 700, /home/ubuntu/.ssh]
+  - [chmod, 600, /home/ubuntu/.ssh/authorized_keys]

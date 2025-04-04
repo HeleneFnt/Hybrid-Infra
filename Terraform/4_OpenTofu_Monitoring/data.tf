@@ -26,17 +26,3 @@ data "template_cloudinit_config" "config" {
 data "template_file" "network_config" {
   template = templatefile("${path.module}/config/network_config.yaml", {})
 }
-
-data "template_file" "alertmanager" {
-  template = file("${path.module}/config/alertmanager.yaml.tpl")
-  vars = {
-    alertmanager_email_password = var.alertmanager_email_password,
-    receiver_name               = var.receiver_name,
-    email_to                    = var.email_to,
-    email_from                  = var.email_from,
-    smtp_host                   = var.smtp_host,
-    smtp_port                   = var.smtp_port,
-    auth_username               = var.auth_username,
-    auth_identity               = var.auth_identity
-  }
-}
